@@ -25,58 +25,66 @@ export default function App() {
 
   return (
     <div className="app">
-      <Typography variant="h3">Morse code translate</Typography>
-      <Logo size={50} />
-      <Grid
-        marginTop={7}
-        container
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-        columnGap={1}
-        rowGap={1}
-      >
-        <TextField
-          label={`${!translateToggle ? "Original text" : "Morse code"}`}
-          multiline
-          minRows={5}
-          value={value}
-          fullWidth
-          onChange={(e) => {
-            setValue(e.target.value.toUpperCase());
-            setTranslatedValue(
-              !translateToggle
-                ? encodeMorse(e.target.value)
-                : decodeMorse(e.target.value)
-            );
-          }}
-        />
-        <Button
-          onClick={(e) => {
-            setValue(translatedValue);
-            setTranslatedValue(value);
-            setTranslateToggle((prevState) => !prevState);
-          }}
+      <Grid direction="column" rowSpacing={3} container>
+        <Grid item>
+          <Typography variant="h3">Morse code translate</Typography>
+          <Logo size={50} />
+        </Grid>
+        <Grid item>
+          <Typography variant="caption">
+            Letters are separated by a single space " " and words by 3 spaces "
+            ".
+          </Typography>
+        </Grid>
+        <Grid
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          rowGap={1}
+          container
         >
-          <SyncAltIcon />
-        </Button>
-        <TextField
-          label={`${!translateToggle ? "Morse code" : "Translated text"}`}
-          multiline
-          minRows={5}
-          value={translatedValue}
-          fullWidth
-          variant="filled"
-          disabled
-        />
-        <Button
-          onClick={() => {
-            setCopyToClipboard(true);
-            navigator.clipboard.writeText(translatedValue);
-          }}
-        >
-          {!copyToClipboard ? "Copy to clipboard" : "Copied!"}
-        </Button>
+          <TextField
+            label={`${!translateToggle ? "Original text" : "Morse code"}`}
+            multiline
+            minRows={5}
+            value={value}
+            fullWidth
+            onChange={(e) => {
+              setValue(e.target.value.toUpperCase());
+              setTranslatedValue(
+                !translateToggle
+                  ? encodeMorse(e.target.value)
+                  : decodeMorse(e.target.value)
+              );
+            }}
+          />
+          <Button
+            onClick={(e) => {
+              setValue(translatedValue);
+              setTranslatedValue(value);
+              setTranslateToggle((prevState) => !prevState);
+            }}
+          >
+            <SyncAltIcon />
+          </Button>
+          <TextField
+            label={`${!translateToggle ? "Morse code" : "Translated text"}`}
+            multiline
+            minRows={5}
+            value={translatedValue}
+            fullWidth
+            variant="filled"
+            disabled
+          />
+          <Button
+            onClick={() => {
+              setCopyToClipboard(true);
+              navigator.clipboard.writeText(translatedValue);
+            }}
+          >
+            {!copyToClipboard ? "Copy to clipboard" : "Copied!"}
+          </Button>
+        </Grid>
       </Grid>
     </div>
   );
