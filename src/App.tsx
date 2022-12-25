@@ -24,7 +24,7 @@ export default function App() {
   }, [copyToClipboard]);
 
   return (
-    <div className="App">
+    <div className="app">
       <Typography variant="h3">Morse code translate</Typography>
       <Logo size={50} />
       <Grid
