@@ -1,6 +1,6 @@
 {
   "homepage": "https://bbtools-ps.github.io/morse-code/",
-  "name": "hr-platform",
+  "name": "morse-code",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
