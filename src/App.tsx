@@ -1,9 +1,9 @@
 import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import "./App.css";
 import Logo from "./common/components/Logo";
 import { decodeMorse, encodeMorse } from "./common/functions/utils";
-import "./styles.css";
 
 export default function App() {
   const [value, setValue] = useState<string>("");
