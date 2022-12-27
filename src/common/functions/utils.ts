@@ -22,7 +22,7 @@ export const decodeMorse = (morseCode: string) => {
 export const encodeMorse = (str: string) => {
   return str
     .toUpperCase()
-    .replace(/\s/g, " ")
+    .replace(/\s+/g, " ")
     .split(" ")
     .map((word) =>
       word
