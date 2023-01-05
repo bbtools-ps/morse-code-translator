@@ -1,7 +1,9 @@
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import SyncAltIcon from "@mui/icons-material/SyncAlt";
-import { Button, Grid, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-import "./App.css";
+import { Box, Button, Card, Grid, TextField, Typography } from "@mui/material";
+import { grey } from "@mui/material/colors";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useEffect, useRef, useState } from "react";
 import Logo from "./common/components/Logo";
 import { decodeMorse, encodeMorse } from "./common/functions/utils";
 
@@ -10,6 +12,8 @@ export default function App() {
   const [translatedValue, setTranslatedValue] = useState<string>("");
   const [translateToggle, setTranslateToggle] = useState<boolean>(false);
   const [copyToClipboard, setCopyToClipboard] = useState<boolean>(false);
+  const outputRef = useRef<HTMLElement>();
+  const isDesktop = useMediaQuery("(min-width:600px)");
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -24,68 +28,111 @@ export default function App() {
   }, [copyToClipboard]);
 
   return (
-    <div className="app">
-      <Grid direction="column" rowSpacing={3} container>
-        <Grid item>
-          <Typography variant="h3">Morse code translate</Typography>
-          <Logo size={50} />
-        </Grid>
-        <Grid item>
-          <Typography variant="caption">
-            Letters are separated by a single space " " and words by 3 spaces "
-            ".
-          </Typography>
-        </Grid>
-        <Grid
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-          rowGap={1}
-          container
-        >
-          <TextField
-            label={`${!translateToggle ? "Original text" : "Morse code"}`}
-            multiline
-            minRows={5}
-            value={value}
-            fullWidth
-            onChange={(e) => {
-              setValue(e.target.value.toUpperCase());
-              setTranslatedValue(
-                !translateToggle
-                  ? encodeMorse(e.target.value)
-                  : decodeMorse(e.target.value)
-              );
-            }}
-          />
-          <Button
-            onClick={(e) => {
-              setValue(translatedValue);
-              setTranslatedValue(value);
-              setTranslateToggle((prevState) => !prevState);
-            }}
-          >
-            <SyncAltIcon />
-          </Button>
-          <TextField
-            label={`${!translateToggle ? "Morse code" : "Translated text"}`}
-            multiline
-            minRows={5}
-            value={translatedValue}
-            fullWidth
-            variant="filled"
-            disabled
-          />
-          <Button
-            onClick={() => {
-              setCopyToClipboard(true);
-              navigator.clipboard.writeText(translatedValue);
-            }}
-          >
-            {!copyToClipboard ? "Copy to clipboard" : "Copied!"}
-          </Button>
-        </Grid>
+    <Grid
+      direction="column"
+      rowSpacing={3}
+      rowGap={3}
+      container
+      alignItems="center"
+    >
+      <Grid
+        container
+        direction="row"
+        sx={{
+          marginTop: "2rem",
+          gap: "2rem",
+          alignItems: "baseline",
+          justifyContent: "center",
+        }}
+      >
+        <Typography variant="h3">
+          <strong>Morse code</strong>
+        </Typography>
+        <Typography variant="h4">translator</Typography>
+        <Logo
+          size={50}
+          style={!isDesktop ? { marginTop: "-1.5rem" } : undefined}
+        />
       </Grid>
-    </div>
+      <Grid
+        item
+        sx={!isDesktop ? { padding: 0, marginTop: "-2rem" } : undefined}
+      >
+        <Typography variant="body1">
+          Letters are separated by a single space " " and words by 3 spaces " ".
+        </Typography>
+      </Grid>
+      <Grid
+        direction={isDesktop ? "row" : "column"}
+        justifyContent="center"
+        alignItems="center"
+        rowGap={1}
+        container
+        columnGap={1}
+      >
+        <TextField
+          label={`${!translateToggle ? "Original text" : "Morse code"}`}
+          multiline
+          minRows={5}
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value.toUpperCase());
+            setTranslatedValue(
+              !translateToggle
+                ? encodeMorse(e.target.value)
+                : decodeMorse(e.target.value)
+            );
+          }}
+          fullWidth={!isDesktop}
+          sx={{ flexGrow: 1 }}
+        />
+        <Button
+          onClick={(e) => {
+            setValue(translatedValue);
+            setTranslatedValue(value);
+            setTranslateToggle((prevState) => !prevState);
+          }}
+        >
+          <SyncAltIcon />
+        </Button>
+        <Box sx={{ flexGrow: 1, width: !isDesktop ? "100%" : undefined }}>
+          <Card variant="outlined" style={{ padding: "1rem" }}>
+            <Grid direction="column" container>
+              <Typography
+                sx={{ fontSize: 14 }}
+                color="text.secondary"
+                gutterBottom
+              >
+                {`${!translateToggle ? "Morse code" : "Translated text"}`}
+              </Typography>
+              <Typography
+                variant="body1"
+                dangerouslySetInnerHTML={{ __html: translatedValue }}
+                style={{
+                  minHeight: "3rem",
+                  backgroundColor: grey[50],
+                  padding: ".5rem",
+                }}
+                marginBottom={3}
+                ref={outputRef}
+              />
+              <Grid item alignSelf={"center"} justifyContent="center">
+                <Button
+                  onClick={() => {
+                    setCopyToClipboard(true);
+                    navigator.clipboard.writeText(outputRef.current.innerText);
+                  }}
+                >
+                  {!copyToClipboard && (
+                    <ContentCopyIcon sx={{ marginRight: 1 }} />
+                  )}
+                  {!copyToClipboard ? "Copy to clipboard" : "Copied!"}
+                </Button>
+              </Grid>
+            </Grid>
+          </Card>
+        </Box>
+      </Grid>
+    </Grid>
   );
 }

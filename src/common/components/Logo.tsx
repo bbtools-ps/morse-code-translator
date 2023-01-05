@@ -2,9 +2,10 @@ import React from "react";
 
 interface LogoProps {
   size: number;
+  style?: React.CSSProperties;
 }
 
-const Logo: React.FC<LogoProps> = ({ size }) => {
+const Logo: React.FC<LogoProps> = ({ size, style }) => {
   return (
     <svg
       height={`${size}px`}
@@ -13,6 +14,7 @@ const Logo: React.FC<LogoProps> = ({ size }) => {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 512.001 512.001"
       xmlSpace="preserve"
+      style={style}
     >
       <g>
         <g>

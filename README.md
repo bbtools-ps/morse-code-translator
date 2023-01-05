@@ -1,4 +1,4 @@
-# Morse code
+# Morse code translator
 
 Translate to Morse code alphabet and vice versa.
 

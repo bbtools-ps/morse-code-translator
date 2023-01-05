@@ -5,5 +5,7 @@
     "source.sortMembers": true
   },
   "javascript.updateImportsOnFileMove.enabled": "prompt",
-  "typescript.updateImportsOnFileMove.enabled": "prompt"
+  "typescript.updateImportsOnFileMove.enabled": "prompt",
+  "prettier.singleQuote": false,
+  "prettier.printWidth": 80
 }
