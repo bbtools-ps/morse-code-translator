@@ -116,7 +116,7 @@ export default function App() {
                 marginBottom={3}
                 ref={outputRef}
               />
-              <Grid item alignSelf={"center"} justifyContent="center">
+              <Grid item alignSelf="center">
                 <Button
                   onClick={() => {
                     setCopyToClipboard(true);
