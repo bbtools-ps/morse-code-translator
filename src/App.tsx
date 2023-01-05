@@ -45,7 +45,7 @@ export default function App() {
           justifyContent: "center",
         }}
       >
-        <Typography variant="h3">
+        <Typography variant="h4">
           <strong>Morse code</strong>
         </Typography>
         <Typography variant="h4">translator</Typography>
@@ -54,14 +54,9 @@ export default function App() {
           style={!isDesktop ? { marginTop: "-1.5rem" } : undefined}
         />
       </Grid>
-      <Grid
-        item
-        sx={!isDesktop ? { padding: 0, marginTop: "-2rem" } : undefined}
-      >
-        <Typography variant="body1">
-          Letters are separated by a single space " " and words by 3 spaces " ".
-        </Typography>
-      </Grid>
+      <Typography variant="body1">
+        Letters are separated by a single space " " and words by 3 spaces " ".
+      </Typography>
       <Grid
         direction={isDesktop ? "row" : "column"}
         justifyContent="center"
@@ -84,7 +79,7 @@ export default function App() {
             );
           }}
           fullWidth={!isDesktop}
-          sx={{ flexGrow: 1 }}
+          sx={isDesktop ? { flex: 1 } : undefined}
         />
         <Button
           onClick={(e) => {
@@ -95,7 +90,7 @@ export default function App() {
         >
           <SyncAltIcon />
         </Button>
-        <Box sx={{ flexGrow: 1, width: !isDesktop ? "100%" : undefined }}>
+        <Box sx={{ flex: 1, width: !isDesktop ? "100%" : undefined }}>
           <Card variant="outlined" style={{ padding: "1rem" }}>
             <Grid direction="column" container>
               <Typography
