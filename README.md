@@ -22,4 +22,4 @@ To make the build type:
 
 ## Live demo
 
-[Click here for the live demo](https://bbtools-ps.github.io/morse-code/)
+[Click here for the live demo](https://bbtools-ps.github.io/morse-code-translator/)
