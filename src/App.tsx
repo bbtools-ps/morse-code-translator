@@ -3,7 +3,7 @@ import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import { Box, Button, Card, Grid, TextField, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "./common/components/Logo";
 import { decodeMorse, encodeMorse } from "./common/functions/utils";
 
@@ -12,7 +12,6 @@ export default function App() {
   const [translatedValue, setTranslatedValue] = useState<string>("");
   const [translateToggle, setTranslateToggle] = useState<boolean>(false);
   const [copyToClipboard, setCopyToClipboard] = useState<boolean>(false);
-  const outputRef = useRef<HTMLElement>();
   const isDesktop = useMediaQuery("(min-width:600px)");
 
   useEffect(() => {
@@ -65,6 +64,7 @@ export default function App() {
         container
         columnGap={1}
       >
+        {/* INPUT FIELD */}
         <TextField
           label={`${!translateToggle ? "Original text" : "Morse code"}`}
           multiline
@@ -100,22 +100,26 @@ export default function App() {
               >
                 {`${!translateToggle ? "Morse code" : "Translated text"}`}
               </Typography>
+              {/* OUTPUT FIELD */}
               <Typography
                 variant="body1"
-                dangerouslySetInnerHTML={{ __html: translatedValue }}
-                style={{
+                sx={{
                   minHeight: "3rem",
                   backgroundColor: grey[50],
                   padding: ".5rem",
+                  fontWeight: translateToggle === false ? "bold" : "inherit",
+                  fontSize: translateToggle === false ? "1.5rem" : "inherit",
                 }}
                 marginBottom={3}
-                ref={outputRef}
-              />
+              >
+                {translatedValue}
+              </Typography>
               <Grid item alignSelf="center">
                 <Button
                   onClick={() => {
+                    if (!translatedValue) return;
                     setCopyToClipboard(true);
-                    navigator.clipboard.writeText(outputRef.current.innerText);
+                    navigator.clipboard.writeText(translatedValue);
                   }}
                 >
                   {!copyToClipboard && (
