@@ -1,6 +1,14 @@
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import SyncAltIcon from "@mui/icons-material/SyncAlt";
-import { Box, Button, Card, Grid, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  Grid,
+  IconButton,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { grey } from "@mui/material/colors";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useEffect, useState } from "react";
@@ -81,15 +89,16 @@ export default function App() {
           fullWidth={!isDesktop}
           sx={isDesktop ? { flex: 1 } : undefined}
         />
-        <Button
-          onClick={(e) => {
+        <IconButton
+          onClick={() => {
             setValue(translatedValue);
             setTranslatedValue(value);
             setTranslateToggle((prevState) => !prevState);
           }}
+          aria-label="Translate switch"
         >
           <SyncAltIcon />
-        </Button>
+        </IconButton>
         <Box sx={{ flex: 1, width: !isDesktop ? "100%" : undefined }}>
           <Card variant="outlined" style={{ padding: "1rem" }}>
             <Grid direction="column" container>
