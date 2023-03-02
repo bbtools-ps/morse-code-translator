@@ -1,8 +1,6 @@
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import {
   Box,
-  Button,
   Card,
   Grid,
   IconButton,
@@ -11,7 +9,8 @@ import {
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import CopyButton from "./common/components/CopyButton";
 import Logo from "./common/components/Logo";
 import { decodeMorse, encodeMorse } from "./common/functions/utils";
 
@@ -19,20 +18,7 @@ export default function App() {
   const [value, setValue] = useState<string>("");
   const [translatedValue, setTranslatedValue] = useState<string>("");
   const [translateToggle, setTranslateToggle] = useState<boolean>(false);
-  const [copyToClipboard, setCopyToClipboard] = useState<boolean>(false);
   const isDesktop = useMediaQuery("(min-width:600px)");
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (copyToClipboard) {
-        setCopyToClipboard(false);
-      }
-    }, 2000);
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [copyToClipboard]);
 
   return (
     <Grid
@@ -124,18 +110,12 @@ export default function App() {
                 {translatedValue}
               </Typography>
               <Grid item alignSelf="center">
-                <Button
+                <CopyButton
                   onClick={() => {
                     if (!translatedValue) return;
-                    setCopyToClipboard(true);
                     navigator.clipboard.writeText(translatedValue);
                   }}
-                >
-                  {!copyToClipboard && (
-                    <ContentCopyIcon sx={{ marginRight: 1 }} />
-                  )}
-                  {!copyToClipboard ? "Copy to clipboard" : "Copied!"}
-                </Button>
+                />
               </Grid>
             </Grid>
           </Card>
