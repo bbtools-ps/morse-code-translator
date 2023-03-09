@@ -8,7 +8,7 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({ copyrightLabel }) => {
   return (
     <footer>
-      <Typography sx={{ textAlign: "center", mb: 3, mt: 1.5 }}>
+      <Typography sx={{ textAlign: "center", mt: 1.5 }}>
         © {getCurrentYear()}.
         <Link href="https://bogdan-bogdanovic.com/" sx={{ ml: 1 }}>
           {copyrightLabel}

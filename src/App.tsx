@@ -29,30 +29,30 @@ export default function App() {
   };
 
   return (
-    <>
-      <Box
-        sx={{ display: "flex", flex: 1, flexDirection: "column", p: 3, gap: 3 }}
+    <Box
+      sx={{ display: "flex", flex: 1, flexDirection: "column", p: 3, gap: 3 }}
+    >
+      <Grid
+        container
+        direction="row"
+        sx={{
+          gap: "2rem",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
-        <Grid
-          container
-          direction="row"
-          sx={{
-            gap: "2rem",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Box>
-            <Typography variant="h4">
-              <strong>Morse code</strong>
-            </Typography>
-            <Typography variant="h4">translator</Typography>
-          </Box>
-          <Logo size={50} />
-        </Grid>
-        <Typography variant="body1" textAlign="center">
-          Letters are separated by a single space " " and words by 3 spaces " ".
-        </Typography>
+        <Box>
+          <Typography variant="h4">
+            <strong>Morse code</strong>
+          </Typography>
+          <Typography variant="h4">translator</Typography>
+        </Box>
+        <Logo size={50} />
+      </Grid>
+      <Typography variant="body1" textAlign="center">
+        Letters are separated by a single space " " and words by 3 spaces " ".
+      </Typography>
+      <Box sx={{ display: "flex", flex: 1, flexDirection: "column", gap: 3 }}>
         <Grid
           direction={isDesktop ? "row" : "column"}
           justifyContent="center"
@@ -142,6 +142,6 @@ export default function App() {
         </Box>
       </Box>
       <Footer copyrightLabel="Bogdan Bogdanovic" />
-    </>
+    </Box>
   );
 }
