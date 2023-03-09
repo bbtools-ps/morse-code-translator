@@ -36,3 +36,8 @@ export const encodeMorse = (str: string) => {
     .join("   ")
     .trim();
 };
+
+export const getCurrentYear = () => {
+  const date = new Date();
+  return date.getFullYear();
+};
