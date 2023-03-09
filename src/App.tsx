@@ -1,6 +1,7 @@
 import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import {
   Box,
+  Button,
   Card,
   Grid,
   IconButton,
@@ -21,6 +22,12 @@ export default function App() {
   const [translateToggle, setTranslateToggle] = useState<boolean>(false);
   const isDesktop = useMediaQuery("(min-width:600px)");
 
+  const handleReset = () => {
+    setValue("");
+    setTranslatedValue("");
+    setTranslateToggle(false);
+  };
+
   return (
     <>
       <Box
@@ -31,18 +38,17 @@ export default function App() {
           direction="row"
           sx={{
             gap: "2rem",
-            alignItems: "baseline",
+            alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <Typography variant="h4">
-            <strong>Morse code</strong>
-          </Typography>
-          <Typography variant="h4">translator</Typography>
-          <Logo
-            size={50}
-            style={!isDesktop ? { marginTop: "-1.5rem" } : undefined}
-          />
+          <Box>
+            <Typography variant="h4">
+              <strong>Morse code</strong>
+            </Typography>
+            <Typography variant="h4">translator</Typography>
+          </Box>
+          <Logo size={50} />
         </Grid>
         <Typography variant="body1" textAlign="center">
           Letters are separated by a single space " " and words by 3 spaces " ".
@@ -59,7 +65,7 @@ export default function App() {
           <TextField
             label={`${!translateToggle ? "Original text" : "Morse code"}`}
             multiline
-            minRows={7}
+            minRows={6}
             value={value}
             onChange={(e) => {
               setValue(e.target.value.toUpperCase());
@@ -108,8 +114,12 @@ export default function App() {
                     padding: ".5rem",
                     fontWeight: translateToggle === false ? "bold" : "inherit",
                     fontSize: translateToggle === false ? "1.5rem" : "inherit",
+                    whiteSpace: "pre",
                   }}
                   marginBottom={3}
+                  aria-label={`${
+                    !translateToggle ? "Morse code" : "Translated text"
+                  }`}
                 >
                   {translatedValue}
                 </Typography>
@@ -125,8 +135,13 @@ export default function App() {
             </Card>
           </Box>
         </Grid>
+        <Box justifyContent="center" display="flex">
+          <Button variant="outlined" onClick={handleReset}>
+            Reset
+          </Button>
+        </Box>
       </Box>
-      <Footer copyrightLabel="Bogdan Bogdanovic" />{" "}
+      <Footer copyrightLabel="Bogdan Bogdanovic" />
     </>
   );
 }
