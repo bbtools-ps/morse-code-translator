@@ -5,7 +5,7 @@ import App from "./App";
 import { encodeMorse } from "./common/functions/utils";
 
 describe("<App/>", () => {
-  it("should render the logo, description, Input field, Output field, Switch, Copy, and Reset buttons", () => {
+  it("should render the logo, description, Input field, Output field, Theme Switch, Translate Switch, Copy, and Reset buttons", () => {
     render(<App />);
     const logo1 = screen.getAllByRole("heading")[0];
     const logo2 = screen.getAllByRole("heading")[1];
@@ -14,7 +14,12 @@ describe("<App/>", () => {
     );
     const inputField = screen.getByLabelText(/original text/i);
     const outputField = screen.getByLabelText(/morse code/i);
-    const btnSwitch = screen.getByRole("button", { name: /switch/i });
+    const btnSwitchTheme = screen.getByRole("button", {
+      name: /theme switch/i,
+    });
+    const btnSwitchTranslate = screen.getByRole("button", {
+      name: /translate switch/i,
+    });
     const btnCopy = screen.getByRole("button", { name: /copy to clipboard/i });
     const btnReset = screen.getByRole("button", { name: /reset/i });
 
@@ -23,7 +28,8 @@ describe("<App/>", () => {
     expect(description).toBeInTheDocument();
     expect(inputField).toBeInTheDocument();
     expect(outputField).toBeInTheDocument();
-    expect(btnSwitch).toBeInTheDocument();
+    expect(btnSwitchTheme).toBeInTheDocument();
+    expect(btnSwitchTranslate).toBeInTheDocument();
     expect(btnCopy).toBeInTheDocument();
     expect(btnReset).toBeInTheDocument();
   });
@@ -58,7 +64,7 @@ describe("<App/>", () => {
   });
   it("should be able to switch the conversion from regular text to morse code", async () => {
     render(<App />);
-    const btnSwitch = screen.getByRole("button", { name: /switch/i });
+    const btnSwitch = screen.getByRole("button", { name: /translate switch/i });
 
     await userEvent.click(btnSwitch);
 
@@ -69,7 +75,7 @@ describe("<App/>", () => {
     const testValue = "test";
     const morseValue = encodeMorse(testValue);
     render(<App />);
-    const btnSwitch = screen.getByRole("button", { name: /switch/i });
+    const btnSwitch = screen.getByRole("button", { name: /translate switch/i });
 
     await userEvent.click(btnSwitch);
     await userEvent.type(screen.getByLabelText(/morse code/i), morseValue);
@@ -83,7 +89,7 @@ describe("<App/>", () => {
     const inputField = screen.getByLabelText(/original/i);
     const outputField = screen.getByLabelText(/morse/i);
     const btnReset = screen.getByRole("button", { name: /reset/i });
-    const btnSwitch = screen.getByRole("button", { name: /switch/i });
+    const btnSwitch = screen.getByRole("button", { name: /translate switch/i });
 
     await userEvent.type(inputField, "test");
     await userEvent.click(btnSwitch);
