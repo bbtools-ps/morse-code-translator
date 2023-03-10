@@ -125,6 +125,7 @@ export default function App() {
                       sx={{ fontSize: 14 }}
                       color="text.secondary"
                       gutterBottom
+                      id="outputValue"
                     >
                       {`${!translateToggle ? "Morse code" : "Translated text"}`}
                     </Typography>
@@ -143,9 +144,7 @@ export default function App() {
                         bgcolor: "action.hover",
                       }}
                       marginBottom={3}
-                      aria-label={`${
-                        !translateToggle ? "Morse code" : "Translated text"
-                      }`}
+                      aria-labelledby="outputValue"
                     >
                       {translatedValue}
                     </Typography>
