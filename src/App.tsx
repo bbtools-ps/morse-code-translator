@@ -144,9 +144,14 @@ export default function App() {
                         bgcolor: "action.hover",
                       }}
                       marginBottom={3}
-                      aria-labelledby="outputValue"
                     >
-                      {translatedValue}
+                      <span
+                        aria-labelledby="outputValue"
+                        role="textbox"
+                        aria-readonly
+                      >
+                        {translatedValue}
+                      </span>
                     </Typography>
                     <Grid item alignSelf="center">
                       <CopyButton
