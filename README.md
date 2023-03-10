@@ -10,7 +10,7 @@ To install all dependencies:
 
 `npm install`
 
-To run the project in the local development mode:
+To start the project in the local development mode:
 
 `npm start`
 
