@@ -69,9 +69,12 @@ export default function App() {
               style={{ fill: theme.palette.mode === "dark" ? "#fff" : "#000" }}
             />
           </Grid>
-          <Typography variant="body1" textAlign="center">
-            Letters are separated by a single space " " and words by 3 spaces "
-            ".
+          <Typography
+            variant="body1"
+            textAlign="center"
+            sx={{ whiteSpace: "pre-wrap" }}
+          >
+            {`Letters are separated by a single space " " and words by 3 spaces "   ".`}
           </Typography>
           <Box
             sx={{ display: "flex", flex: 1, flexDirection: "column", gap: 3 }}
