@@ -1,7 +1,5 @@
 html {
   box-sizing: border-box;
-  height: 100%;
-  display: flex;
 }
 
 *,
@@ -10,16 +8,20 @@ html {
   box-sizing: inherit;
 }
 
+html,
 body {
+  height: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden;
+}
+
+body {
   display: flex;
-  flex: 1;
   flex-direction: column;
 }
 
 #root {
-  display: flex;
-  flex-direction: column;
   flex: 1;
+  overflow: auto;
 }
