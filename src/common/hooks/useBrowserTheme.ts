@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const useBrowserTheme = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(
-    window.matchMedia("(prefers-color-scheme: dark)").matches
+    () => window.matchMedia("(prefers-color-scheme: dark)").matches
   );
 
   useEffect(() => {
