@@ -1,11 +1,11 @@
 import { Link, Typography } from "@mui/material";
 import { getCurrentYear } from "../../../common/functions/utils";
 
-interface FooterProps {
+interface IFooterProps {
   copyrightLabel: string;
 }
 
-const Footer: React.FC<FooterProps> = ({ copyrightLabel }) => {
+const Footer: React.FC<IFooterProps> = ({ copyrightLabel }) => {
   return (
     <footer>
       <Typography sx={{ textAlign: "center", mt: 1.5 }}>

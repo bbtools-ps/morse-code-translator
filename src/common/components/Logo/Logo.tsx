@@ -1,11 +1,11 @@
 import React from "react";
 
-interface LogoProps {
+interface ILogoProps {
   size: number;
   style?: React.CSSProperties;
 }
 
-const Logo: React.FC<LogoProps> = ({ size, style }) => {
+const Logo: React.FC<ILogoProps> = ({ size, style }) => {
   return (
     <svg
       height={`${size}px`}

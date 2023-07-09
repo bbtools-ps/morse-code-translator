@@ -2,13 +2,13 @@ import { createTheme } from "@mui/material";
 import { createContext, useEffect, useMemo, useState } from "react";
 import useBrowserTheme from "./useBrowserTheme";
 
-type ColorMode = "light" | "dark";
+type IColorMode = "light" | "dark";
 
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 const useColorTheme = () => {
-  const [mode, setMode] = useState<ColorMode>(
-    (localStorage.getItem("theme") as ColorMode) || "light"
+  const [mode, setMode] = useState<IColorMode>(
+    (localStorage.getItem("theme") as IColorMode) || "light"
   );
   const colorMode = useMemo(
     () => ({
