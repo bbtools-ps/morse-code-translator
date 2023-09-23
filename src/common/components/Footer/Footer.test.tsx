@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { describe, it, vi } from "vitest";
+import { vi } from "vitest";
 import Copyright from "./Footer";
 
 describe("<Footer/>", () => {

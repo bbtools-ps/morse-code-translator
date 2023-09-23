@@ -1,4 +1,4 @@
-import { describe, it, vi } from "vitest";
+import { vi } from "vitest";
 import { decodeMorse, encodeMorse, getCurrentYear } from "./utils";
 
 describe("getCurrentYear()", () => {
