@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vitest run --reporter=verbose && vite build",
     "preview": "vite preview",
     "test": "vitest --reporter=verbose"
   },
