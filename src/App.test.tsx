@@ -3,8 +3,6 @@ import userEvent from "@testing-library/user-event";
 import App from "./App";
 import { encodeMorse } from "./common/functions/utils";
 
-//test
-
 describe("<App/>", () => {
   it("should render the logo, description, Input field, Output field, Theme Switch, Translate Switch, Copy, and Reset buttons", () => {
     render(<App />);
