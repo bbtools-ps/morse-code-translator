@@ -14,7 +14,7 @@
     "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest --reporter verbose"
+    "test": "vitest --reporter=verbose"
   },
   "browserslist": {
     "production": [
