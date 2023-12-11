@@ -1,17 +1,22 @@
 import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import {
   Box,
+  Button,
   Card,
   Grid,
   IconButton,
   TextField,
+  ThemeProvider,
   Typography,
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useState } from "react";
-import CopyButton from "./common/components/CopyButton";
-import Logo from "./common/components/Logo";
+import CopyButton from "./common/components/CopyButton/CopyButton";
+import Footer from "./common/components/Footer/Footer";
+import Logo from "./common/components/Logo/Logo";
+import ThemeSwither from "./common/components/ThemeSwitcher/ThemeSwitcher";
+import useColorTheme, { ColorModeContext } from "./common/hooks/useColorTheme";
 import { decodeMorse, encodeMorse } from "./common/utils";
 
 export default function App() {
@@ -19,108 +24,159 @@ export default function App() {
   const [translatedValue, setTranslatedValue] = useState<string>("");
   const [translateToggle, setTranslateToggle] = useState<boolean>(false);
   const isDesktop = useMediaQuery("(min-width:600px)");
+  const { colorMode, theme } = useColorTheme();
+
+  const handleReset = () => {
+    setValue("");
+    setTranslatedValue("");
+    setTranslateToggle(false);
+  };
 
   return (
-    <Grid
-      direction="column"
-      rowSpacing={3}
-      rowGap={3}
-      container
-      alignItems="center"
-    >
-      <Grid
-        container
-        direction="row"
-        sx={{
-          marginTop: "2rem",
-          gap: "2rem",
-          alignItems: "baseline",
-          justifyContent: "center",
-        }}
-      >
-        <Typography variant="h4">
-          <strong>Morse code</strong>
-        </Typography>
-        <Typography variant="h4">translator</Typography>
-        <Logo
-          size={50}
-          style={!isDesktop ? { marginTop: "-1.5rem" } : undefined}
-        />
-      </Grid>
-      <Typography variant="body1">
-        Letters are separated by a single space " " and words by 3 spaces " ".
-      </Typography>
-      <Grid
-        direction={isDesktop ? "row" : "column"}
-        justifyContent="center"
-        alignItems="center"
-        rowGap={1}
-        container
-        columnGap={1}
-      >
-        {/* INPUT FIELD */}
-        <TextField
-          label={`${!translateToggle ? "Original text" : "Morse code"}`}
-          multiline
-          minRows={5}
-          value={value}
-          onChange={(e) => {
-            setValue(e.target.value.toUpperCase());
-            setTranslatedValue(
-              !translateToggle
-                ? encodeMorse(e.target.value)
-                : decodeMorse(e.target.value)
-            );
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <Box
+          sx={{
+            display: "flex",
+            flex: 1,
+            flexDirection: "column",
+            p: 3,
+            gap: 3,
+            bgcolor: "background.default",
+            color: "text.primary",
           }}
-          fullWidth={!isDesktop}
-          sx={isDesktop ? { flex: 1 } : undefined}
-        />
-        <IconButton
-          onClick={() => {
-            setValue(translatedValue);
-            setTranslatedValue(value);
-            setTranslateToggle((prevState) => !prevState);
-          }}
-          aria-label="Translate switch"
         >
-          <SyncAltIcon />
-        </IconButton>
-        <Box sx={{ flex: 1, width: !isDesktop ? "100%" : undefined }}>
-          <Card variant="outlined" style={{ padding: "1rem" }}>
-            <Grid direction="column" container>
-              <Typography
-                sx={{ fontSize: 14 }}
-                color="text.secondary"
-                gutterBottom
-              >
-                {`${!translateToggle ? "Morse code" : "Translated text"}`}
+          <Box sx={{ display: "flex", justifyContent: "flex-end", mb: -2 }}>
+            <ThemeSwither />
+          </Box>
+          <Grid
+            container
+            direction="row"
+            sx={{
+              gap: "2rem",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Box>
+              <Typography variant="h4">
+                <strong>Morse code</strong>
               </Typography>
-              {/* OUTPUT FIELD */}
-              <Typography
-                variant="body1"
-                sx={{
-                  minHeight: "3rem",
-                  backgroundColor: grey[50],
-                  padding: ".5rem",
-                  fontWeight: translateToggle === false ? "bold" : "inherit",
-                  fontSize: translateToggle === false ? "1.5rem" : "inherit",
+              <Typography variant="h4">translator</Typography>
+            </Box>
+            <Logo
+              size={50}
+              style={{ fill: theme.palette.mode === "dark" ? "#fff" : "#000" }}
+            />
+          </Grid>
+          <Typography
+            variant="body1"
+            textAlign="center"
+            sx={{ whiteSpace: "pre-wrap" }}
+          >
+            {`Letters are separated by a single space " " and words by 3 spaces "   ".`}
+          </Typography>
+          <Box
+            sx={{ display: "flex", flex: 1, flexDirection: "column", gap: 3 }}
+          >
+            <Grid
+              direction={isDesktop ? "row" : "column"}
+              justifyContent="center"
+              alignItems="center"
+              rowGap={1}
+              container
+              columnGap={1}
+            >
+              {/* INPUT FIELD */}
+              <TextField
+                label={`${!translateToggle ? "Original text" : "Morse code"}`}
+                multiline
+                minRows={6}
+                value={value}
+                onChange={(e) => {
+                  setValue(e.target.value.toUpperCase());
+                  setTranslatedValue(
+                    !translateToggle
+                      ? encodeMorse(e.target.value)
+                      : decodeMorse(e.target.value)
+                  );
                 }}
-                marginBottom={3}
+                fullWidth={!isDesktop}
+                sx={isDesktop ? { flex: 1 } : undefined}
+              />
+              <IconButton
+                onClick={() => {
+                  setValue(translatedValue);
+                  setTranslatedValue(value);
+                  setTranslateToggle((prevState) => !prevState);
+                }}
+                aria-label="Translate switch"
               >
-                {translatedValue}
-              </Typography>
-              <Grid item alignSelf="center">
-                <CopyButton
-                  onClick={() => {
-                    if (!translatedValue) return;
-                    navigator.clipboard.writeText(translatedValue);
-                  }}
-                />
-              </Grid>
+                <SyncAltIcon />
+              </IconButton>
+              <Box
+                sx={{
+                  display: "flex",
+                  flex: 1,
+                  height: "100%",
+                  width: !isDesktop ? "100%" : undefined,
+                }}
+              >
+                <Card variant="outlined" style={{ padding: "1rem", flex: 1 }}>
+                  <Grid direction="column" container>
+                    <Typography
+                      sx={{ fontSize: 14 }}
+                      color="text.secondary"
+                      gutterBottom
+                      id="outputValue"
+                    >
+                      {`${!translateToggle ? "Morse code" : "Translated text"}`}
+                    </Typography>
+                    {/* OUTPUT FIELD */}
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        minHeight: "3rem",
+                        backgroundColor: grey[50],
+                        padding: ".5rem",
+                        fontWeight:
+                          translateToggle === false ? "bold" : "inherit",
+                        fontSize:
+                          translateToggle === false ? "1.5rem" : "inherit",
+                        whiteSpace: "pre",
+                        bgcolor: "action.hover",
+                      }}
+                      marginBottom={3}
+                    >
+                      <span
+                        aria-labelledby="outputValue"
+                        role="textbox"
+                        aria-readonly
+                      >
+                        {translatedValue}
+                      </span>
+                    </Typography>
+                    <Grid item alignSelf="center">
+                      <CopyButton
+                        onClick={() => {
+                          if (!translatedValue) return;
+                          navigator.clipboard.writeText(translatedValue);
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
+                </Card>
+              </Box>
             </Grid>
-          </Card>
+            <Box justifyContent="center" display="flex">
+              <Button variant="outlined" onClick={handleReset}>
+                Reset
+              </Button>
+            </Box>
+          </Box>
+          <Footer copyrightLabel="Bogdan Bogdanovic" />
         </Box>
-      </Grid>
-    </Grid>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }

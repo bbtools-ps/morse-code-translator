@@ -6,20 +6,22 @@ This project uses [React.js](https://reactjs.org/).
 
 ## Project setup
 
-Recommended IDE is [VS Code](https://code.visualstudio.com/).
-
-To install all dependencies type following inside Terminal:
+To install all dependencies:
 
 `npm install`
 
-To run the project in development mode type:
+To start the project in the local development mode:
 
 `npm start`
 
-To make the build type:
+To make the build:
 
 `npm run build`
 
+To start the tests:
+
+`npm run test`
+
 ## Live demo
 
-[Click here for the live demo](https://bbtools-ps.github.io/morse-code-translator/)
+[Click here for the live demo](https://bbtools-morse-code.netlify.app/)

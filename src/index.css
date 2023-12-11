@@ -7,3 +7,21 @@ html {
 *:after {
   box-sizing: inherit;
 }
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  flex: 1;
+  overflow: auto;
+}

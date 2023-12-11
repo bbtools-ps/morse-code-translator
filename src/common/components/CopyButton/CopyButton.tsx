@@ -2,12 +2,12 @@ import ContentCopy from "@mui/icons-material/ContentCopy";
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 
-interface CopyButtonProps {
+interface ICopyButtonProps {
   messageDelay?: number;
   onClick: () => void;
 }
 
-const CopyButton: React.FC<CopyButtonProps> = ({
+const CopyButton: React.FC<ICopyButtonProps> = ({
   messageDelay = 2000,
   onClick,
 }) => {
