@@ -1,22 +1,4 @@
-import { vi } from "vitest";
-import { decodeMorse, encodeMorse, getCurrentYear } from "./utils";
-
-describe("getCurrentYear()", () => {
-  beforeEach(() => {
-    vi.useFakeTimers();
-  });
-  afterEach(() => {
-    vi.useRealTimers();
-  });
-  it("should return the current year", () => {
-    const mockDate = new Date(2022, 0, 1);
-    vi.setSystemTime(mockDate);
-
-    const result = getCurrentYear();
-
-    expect(result).toBe(2022);
-  });
-});
+import { decodeMorse, encodeMorse } from ".";
 
 describe("encodeMorse()", () => {
   it("should convert the regular text to morse code", () => {

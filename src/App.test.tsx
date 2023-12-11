@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
-import { encodeMorse } from "./common/functions/utils";
+import { encodeMorse } from "./common/utils";
 
 describe("<App/>", () => {
   it("should render the logo, description, Input field, Output field, Theme Switch, Translate Switch, Copy, and Reset buttons", () => {
