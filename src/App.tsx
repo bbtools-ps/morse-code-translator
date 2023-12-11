@@ -12,7 +12,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useState } from "react";
 import CopyButton from "./common/components/CopyButton";
 import Logo from "./common/components/Logo";
-import { decodeMorse, encodeMorse } from "./common/functions/utils";
+import { decodeMorse, encodeMorse } from "./common/utils";
 
 export default function App() {
   const [value, setValue] = useState<string>("");
