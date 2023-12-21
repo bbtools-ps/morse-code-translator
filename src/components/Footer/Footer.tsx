@@ -1,4 +1,4 @@
-import { getCurrentYear } from "@/common/utils";
+import { getCurrentYear } from "@/utils";
 import { Link, Typography } from "@mui/material";
 
 interface IFooterProps {

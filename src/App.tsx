@@ -12,12 +12,12 @@ import {
 import { grey } from "@mui/material/colors";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useState } from "react";
-import CopyButton from "./common/components/CopyButton/CopyButton";
-import Footer from "./common/components/Footer/Footer";
-import Logo from "./common/components/Logo/Logo";
-import ThemeSwither from "./common/components/ThemeSwitcher/ThemeSwitcher";
-import useColorTheme, { ColorModeContext } from "./common/hooks/useColorTheme";
-import { decodeMorse, encodeMorse } from "./common/utils";
+import CopyButton from "./components/CopyButton/CopyButton";
+import Footer from "./components/Footer/Footer";
+import Logo from "./components/Logo/Logo";
+import ThemeSwither from "./components/ThemeSwitcher/ThemeSwitcher";
+import { ColorModeContext, useColorTheme } from "./hooks";
+import { decodeMorse, encodeMorse } from "./utils";
 
 export default function App() {
   const [value, setValue] = useState<string>("");

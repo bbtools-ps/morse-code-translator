@@ -1,4 +1,4 @@
-import { ColorModeContext } from "@/common/hooks/useColorTheme";
+import { ColorModeContext } from "@/hooks/useColorTheme";
 import {
   Brightness4 as Brightness4Icon,
   Brightness7 as Brightness7Icon,

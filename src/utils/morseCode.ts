@@ -1,4 +1,4 @@
-import { MorseCodeAlphabet } from "../constants/constants";
+import { MorseCodeAlphabet } from "../constants";
 
 export const decodeMorse = (morseCode: string) => {
   return morseCode

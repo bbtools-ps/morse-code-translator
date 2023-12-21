@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useBrowserTheme = () => {
+export const useBrowserTheme = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(
     () => window.matchMedia("(prefers-color-scheme: dark)").matches
   );
@@ -18,5 +18,3 @@ const useBrowserTheme = () => {
 
   return isDarkTheme;
 };
-
-export default useBrowserTheme;
