@@ -6,7 +6,7 @@ import {
 import { IconButton, useTheme } from "@mui/material";
 import { useContext } from "react";
 
-const ThemeSwither = () => {
+export default function ThemeSwither() {
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
   return (
@@ -23,6 +23,4 @@ const ThemeSwither = () => {
       )}
     </IconButton>
   );
-};
-
-export default ThemeSwither;
+}

@@ -5,7 +5,7 @@ interface ILogoProps {
   style?: React.CSSProperties;
 }
 
-const Logo: React.FC<ILogoProps> = ({ size, style }) => {
+export default function Logo({ size, style }: ILogoProps) {
   return (
     <svg
       height={`${size}px`}
@@ -90,6 +90,4 @@ const Logo: React.FC<ILogoProps> = ({ size, style }) => {
       <g></g>
     </svg>
   );
-};
-
-export default Logo;
+}

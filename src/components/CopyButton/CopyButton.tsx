@@ -7,10 +7,10 @@ interface ICopyButtonProps {
   onClick: () => void;
 }
 
-const CopyButton: React.FC<ICopyButtonProps> = ({
+export default function CopyButton({
   messageDelay = 2000,
   onClick,
-}) => {
+}: ICopyButtonProps) {
   const [copyToClipboard, setCopyToClipboard] = useState<boolean>(false);
 
   useEffect(() => {
@@ -36,6 +36,4 @@ const CopyButton: React.FC<ICopyButtonProps> = ({
       {!copyToClipboard ? "Copy to clipboard" : "Copied!"}
     </Button>
   );
-};
-
-export default CopyButton;
+}

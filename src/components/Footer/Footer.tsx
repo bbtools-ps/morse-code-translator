@@ -5,7 +5,7 @@ interface IFooterProps {
   copyrightLabel: string;
 }
 
-const Footer: React.FC<IFooterProps> = ({ copyrightLabel }) => {
+export default function Footer({ copyrightLabel }: IFooterProps) {
   return (
     <footer>
       <Typography sx={{ textAlign: "center", mt: 1.5 }}>
@@ -16,6 +16,4 @@ const Footer: React.FC<IFooterProps> = ({ copyrightLabel }) => {
       </Typography>
     </footer>
   );
-};
-
-export default Footer;
+}
