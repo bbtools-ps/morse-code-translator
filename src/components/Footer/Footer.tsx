@@ -1,11 +1,11 @@
 import { getCurrentYear } from "@/utils";
 import { Link, Typography } from "@mui/material";
 
-interface IFooterProps {
+interface IProps {
   copyrightLabel: string;
 }
 
-export default function Footer({ copyrightLabel }: IFooterProps) {
+export default function Footer({ copyrightLabel }: IProps) {
   return (
     <footer>
       <Typography sx={{ textAlign: "center", mt: 1.5 }}>
