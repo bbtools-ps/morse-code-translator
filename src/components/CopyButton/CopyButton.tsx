@@ -2,15 +2,12 @@ import ContentCopy from "@mui/icons-material/ContentCopy";
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 
-interface ICopyButtonProps {
+interface IProps {
   messageDelay?: number;
   onClick: () => void;
 }
 
-export default function CopyButton({
-  messageDelay = 2000,
-  onClick,
-}: ICopyButtonProps) {
+export default function CopyButton({ messageDelay = 2000, onClick }: IProps) {
   const [copyToClipboard, setCopyToClipboard] = useState<boolean>(false);
 
   useEffect(() => {

@@ -1,11 +1,11 @@
 import React from "react";
 
-interface ILogoProps {
+interface IProps {
   size: number;
   style?: React.CSSProperties;
 }
 
-export default function Logo({ size, style }: ILogoProps) {
+export default function Logo({ size, style }: IProps) {
   return (
     <svg
       height={`${size}px`}

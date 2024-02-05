@@ -1,4 +1,4 @@
-import { MorseCodeAlphabet } from "../constants";
+import { MORSE_CODE_ALPHABET } from "../constants";
 
 export const decodeMorse = (morseCode: string) => {
   return morseCode
@@ -7,9 +7,9 @@ export const decodeMorse = (morseCode: string) => {
       word
         .split(" ")
         .map((letter) =>
-          Object.keys(MorseCodeAlphabet).find(
+          Object.keys(MORSE_CODE_ALPHABET).find(
             (key) =>
-              MorseCodeAlphabet[key as keyof typeof MorseCodeAlphabet] ===
+              MORSE_CODE_ALPHABET[key as keyof typeof MORSE_CODE_ALPHABET] ===
               letter
           )
         )
@@ -29,7 +29,7 @@ export const encodeMorse = (str: string) => {
         .split("")
         .map(
           (letter) =>
-            MorseCodeAlphabet[letter as keyof typeof MorseCodeAlphabet]
+            MORSE_CODE_ALPHABET[letter as keyof typeof MORSE_CODE_ALPHABET]
         )
         .join(" ")
     )
