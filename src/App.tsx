@@ -15,7 +15,7 @@ import { useState } from "react";
 import CopyButton from "./components/CopyButton/CopyButton";
 import Footer from "./components/Footer/Footer";
 import Logo from "./components/Logo/Logo";
-import ThemeSwither from "./components/ThemeSwitcher/ThemeSwitcher";
+import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher";
 import { ColorModeContext, useColorTheme } from "./hooks";
 import { decodeMorse, encodeMorse } from "./utils";
 
@@ -47,7 +47,7 @@ export default function App() {
           }}
         >
           <Box sx={{ display: "flex", justifyContent: "flex-end", mb: -2 }}>
-            <ThemeSwither />
+            <ThemeSwitcher />
           </Box>
           <Grid
             container

@@ -6,9 +6,10 @@ import {
 import { IconButton, useTheme } from "@mui/material";
 import { useContext } from "react";
 
-export default function ThemeSwither() {
+export default function ThemeSwitcher() {
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
+
   return (
     <IconButton
       sx={{ ml: 1 }}
