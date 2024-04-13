@@ -23,7 +23,7 @@ export default function App() {
   const [value, setValue] = useState<string>("");
   const [translatedValue, setTranslatedValue] = useState<string>("");
   const [translateToggle, setTranslateToggle] = useState<boolean>(false);
-  const isDesktop = useMediaQuery("(min-width:600px)");
+  const isDesktop = useMediaQuery("(min-width:37.5em)");
   const { colorMode, theme } = useColorTheme();
 
   const handleReset = () => {
