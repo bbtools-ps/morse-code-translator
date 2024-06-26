@@ -9,7 +9,7 @@ export default function Footer({ copyrightLabel }: IProps) {
   return (
     <footer>
       <Typography sx={{ textAlign: "center", mt: 1.5 }}>
-      &copy; {getCurrentYear()}.
+        &copy; {getCurrentYear()}.
         <Link href="https://bogdan-bogdanovic.com/" sx={{ ml: 1 }}>
           {copyrightLabel}
         </Link>
