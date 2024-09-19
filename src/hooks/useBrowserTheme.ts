@@ -6,6 +6,7 @@ export const useBrowserTheme = () => {
   );
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleThemeChange = (e: any) => {
       setIsDarkTheme(e.matches);
     };

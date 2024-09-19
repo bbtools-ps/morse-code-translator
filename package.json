@@ -15,7 +15,8 @@
     "build": "tsc && vitest run --reporter=verbose && vite build",
     "preview": "vite preview",
     "test": "vitest --reporter=verbose",
-    "format": "prettier --write '**/*.{js,ts,tsx,jsx}'"
+    "format": "prettier --write '**/*.{js,ts,tsx,jsx}'",
+    "fix": "eslint --fix src"
   },
   "browserslist": {
     "production": [
