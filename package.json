@@ -16,7 +16,8 @@
     "preview": "vite preview",
     "test": "vitest --reporter=verbose",
     "format": "prettier --write '**/*.{js,ts,tsx,jsx}'",
-    "fix": "eslint --fix src"
+    "fix": "eslint --fix src",
+    "preinstall": "npx only-allow pnpm"
   },
   "browserslist": {
     "production": [

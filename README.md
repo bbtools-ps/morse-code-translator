@@ -2,25 +2,28 @@
 
 Translate to Morse code alphabet and vice versa.
 
-This project uses [React.js](https://reactjs.org/).
+This project uses:
+
+- [PNPM](https://pnpm.io/)
+- [React.js](https://reactjs.org/).
 
 ## Project setup
 
 To install all dependencies:
 
-`npm install`
+`pnpm install`
 
 To start the project in the local development mode:
 
-`npm run dev`
+`pnpm dev`
 
 To make the build:
 
-`npm run build`
+`pnpm build`
 
 To start the tests:
 
-`npm run test`
+`pnpm test`
 
 ## Live demo
 
