@@ -59,10 +59,10 @@ export default function App() {
             }}
           >
             <Box>
-              <Typography variant="h4">
+              <Typography variant="h1">
                 <strong>Morse code</strong>
               </Typography>
-              <Typography variant="h4">translator</Typography>
+              <Typography variant="h2">translator</Typography>
             </Box>
             <Logo
               size={50}

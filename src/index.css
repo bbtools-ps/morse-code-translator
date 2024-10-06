@@ -8,20 +8,23 @@ html {
   box-sizing: inherit;
 }
 
-html,
-body {
-  height: 100%;
+html {
+  display: flex;
+  min-height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 
 body {
   display: flex;
+  flex: 1;
   flex-direction: column;
+  padding: 0;
+  margin: 0;
 }
 
 #root {
   flex: 1;
   overflow: auto;
+  display: flex;
 }
