@@ -3,36 +3,45 @@ import ContentCopy from "@mui/icons-material/ContentCopy";
 import { Button } from "@mui/material";
 import { useState } from "react";
 
+const TIMEOUT = 2000;
+
 interface IProps {
-  messageDelay?: number;
   onClick: () => Promise<void>;
 }
 
-export default function CopyButton({ messageDelay = 2000, onClick }: IProps) {
-  const [isCopied, setIsCopied] = useState(false);
+export default function CopyButton({ onClick }: IProps) {
+  const [copyRequest, setCopyRequest] = useState({
+    isCopied: false,
+    hasError: false,
+  });
 
-  const debounce = useDebounce(messageDelay);
+  const debounce = useDebounce(TIMEOUT);
 
   const handleCopy = async () => {
-    setIsCopied(true);
-
-    console.log(isCopied);
+    setCopyRequest({ isCopied: true, hasError: false });
 
     try {
       await onClick();
-    } catch (error) {
-      console.error(error);
+    } catch {
+      setCopyRequest({ isCopied: false, hasError: true });
     } finally {
       debounce(() => {
-        setIsCopied(false);
+        setCopyRequest((prevState) => ({ ...prevState, isCopied: false }));
       });
     }
   };
 
   return (
-    <Button onClick={handleCopy}>
-      {!isCopied && <ContentCopy sx={{ marginRight: 1 }} />}
-      {!isCopied ? "Copy to clipboard" : "Copied!"}
+    <Button onClick={handleCopy} disabled={copyRequest.isCopied}>
+      {!copyRequest.isCopied ? (
+        <>
+          <ContentCopy sx={{ marginRight: 1 }} />
+          <span>Copy to clipboard</span>
+        </>
+      ) : (
+        "Copied!"
+      )}
+      {copyRequest.hasError && "Error"}
     </Button>
   );
 }
