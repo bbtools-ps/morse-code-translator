@@ -16,16 +16,16 @@ export default function CopyButton({ messageDelay = 2000, onClick }: IProps) {
   const handleCopy = async () => {
     setIsCopied(true);
 
+    console.log(isCopied);
+
     try {
       await onClick();
-
-      debounce(() => {
-        setIsCopied(false);
-      });
     } catch (error) {
       console.error(error);
     } finally {
-      setIsCopied(false);
+      debounce(() => {
+        setIsCopied(false);
+      });
     }
   };
 

@@ -5,13 +5,13 @@ import CopyButton from "./CopyButton";
 
 describe("<CopyButton/>", () => {
   it("should render the button", () => {
-    render(<CopyButton onClick={() => {}} />);
+    render(<CopyButton onClick={async () => {}} />);
 
     expect(screen.getByRole("button")).toBeInTheDocument();
   });
 
   it('should initially display the text "Copy to clipboard" on the button', () => {
-    render(<CopyButton onClick={() => {}} />);
+    render(<CopyButton onClick={async () => {}} />);
 
     expect(screen.getByText(/copy to clipboard/i)).toBeInTheDocument();
   });
@@ -26,7 +26,7 @@ describe("<CopyButton/>", () => {
   });
 
   it('should change the text to "Copied!" after user clicks on the button', async () => {
-    render(<CopyButton onClick={() => {}} />);
+    render(<CopyButton onClick={async () => {}} />);
 
     await userEvent.click(screen.getByRole("button"));
 
