@@ -33,13 +33,13 @@ export default function CopyButton({ onClick }: IProps) {
 
   return (
     <Button onClick={handleCopy} disabled={copyRequest.isCopied}>
-      {!copyRequest.isCopied ? (
+      {copyRequest.isCopied ? (
+        "Copied!"
+      ) : (
         <>
           <ContentCopy sx={{ marginRight: 1 }} />
           <span>Copy to clipboard</span>
         </>
-      ) : (
-        "Copied!"
       )}
       {copyRequest.hasError && "Error"}
     </Button>
