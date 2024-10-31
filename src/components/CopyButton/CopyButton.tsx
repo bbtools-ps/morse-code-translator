@@ -1,3 +1,4 @@
+import { useDebounce } from "@/hooks";
 import ContentCopy from "@mui/icons-material/ContentCopy";
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -8,19 +9,17 @@ interface IProps {
 }
 
 export default function CopyButton({ messageDelay = 2000, onClick }: IProps) {
-  const [copyToClipboard, setCopyToClipboard] = useState<boolean>(false);
+  const [copyToClipboard, setCopyToClipboard] = useState(false);
+
+  const debounce = useDebounce(messageDelay);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
+    debounce(() => {
       if (copyToClipboard) {
         setCopyToClipboard(false);
       }
-    }, messageDelay);
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [copyToClipboard, messageDelay]);
+    });
+  }, [copyToClipboard, debounce]);
 
   return (
     <Button
