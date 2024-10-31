@@ -15,21 +15,23 @@ import { useState } from "react";
 import CopyButton from "./components/CopyButton/CopyButton";
 import Footer from "./components/Footer/Footer";
 import Logo from "./components/Logo/Logo";
+import MorsePlayer from "./components/MorsePlayer/MorsePlayer";
 import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher";
 import { ColorModeContext, useColorTheme } from "./hooks";
 import { decodeMorse, encodeMorse } from "./utils";
 
 export default function App() {
-  const [value, setValue] = useState<string>("");
-  const [translatedValue, setTranslatedValue] = useState<string>("");
-  const [translateToggle, setTranslateToggle] = useState<boolean>(false);
+  const [value, setValue] = useState("");
+  const [translatedValue, setTranslatedValue] = useState("");
+  const [isMorseTranslated, setIsMorseTranslated] = useState(false);
+
   const isDesktop = useMediaQuery("(min-width:37.5em)");
   const { colorMode, theme } = useColorTheme();
 
   const handleReset = () => {
     setValue("");
     setTranslatedValue("");
-    setTranslateToggle(false);
+    setIsMorseTranslated(false);
   };
 
   return (
@@ -89,16 +91,16 @@ export default function App() {
             >
               {/* INPUT FIELD */}
               <TextField
-                label={`${!translateToggle ? "Original text" : "Morse code"}`}
+                label={`${isMorseTranslated ? "Morse code" : "Original text"}`}
                 multiline
                 minRows={6}
                 value={value}
                 onChange={(e) => {
                   setValue(e.target.value.toUpperCase());
                   setTranslatedValue(
-                    !translateToggle
-                      ? encodeMorse(e.target.value)
-                      : decodeMorse(e.target.value)
+                    isMorseTranslated
+                      ? decodeMorse(e.target.value)
+                      : encodeMorse(e.target.value)
                   );
                 }}
                 fullWidth={!isDesktop}
@@ -108,7 +110,7 @@ export default function App() {
                 onClick={() => {
                   setValue(translatedValue);
                   setTranslatedValue(value);
-                  setTranslateToggle((prevState) => !prevState);
+                  setIsMorseTranslated((prevState) => !prevState);
                 }}
                 aria-label="Translate switch"
               >
@@ -130,7 +132,7 @@ export default function App() {
                       gutterBottom
                       id="outputValue"
                     >
-                      {`${!translateToggle ? "Morse code" : "Translated text"}`}
+                      {`${isMorseTranslated ? "Translated text" : "Morse code"}`}
                     </Typography>
                     {/* OUTPUT FIELD */}
                     <Typography
@@ -139,10 +141,8 @@ export default function App() {
                         minHeight: "3rem",
                         backgroundColor: grey[50],
                         padding: ".5rem",
-                        fontWeight:
-                          translateToggle === false ? "bold" : "inherit",
-                        fontSize:
-                          translateToggle === false ? "1.5rem" : "inherit",
+                        fontWeight: isMorseTranslated ? "inherit" : "bold",
+                        fontSize: isMorseTranslated ? "inherit" : "1.5rem",
                         whiteSpace: "pre",
                         bgcolor: "action.hover",
                       }}
@@ -162,6 +162,11 @@ export default function App() {
                           if (!translatedValue) return;
                           await navigator.clipboard.writeText(translatedValue);
                         }}
+                      />
+                      <MorsePlayer
+                        originalText={
+                          isMorseTranslated ? translatedValue : value
+                        }
                       />
                     </Grid>
                   </Grid>
