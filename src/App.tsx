@@ -158,9 +158,9 @@ export default function App() {
                     </Typography>
                     <Grid item alignSelf="center">
                       <CopyButton
-                        onClick={() => {
+                        onClick={async () => {
                           if (!translatedValue) return;
-                          navigator.clipboard.writeText(translatedValue);
+                          await navigator.clipboard.writeText(translatedValue);
                         }}
                       />
                     </Grid>
