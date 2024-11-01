@@ -19,11 +19,11 @@ export default function MorsePlayer({ originalText }: IProps) {
   const currentPosition = useRef(0);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const activeTimers = useRef<number[]>([]);
+  const activeTimers = useRef(new Set<number>());
 
   const cleanup = useCallback(() => {
     activeTimers.current.forEach((timerId) => window.clearTimeout(timerId));
-    activeTimers.current = [];
+    activeTimers.current.clear();
 
     if (audioContext.current?.state !== "closed") {
       audioContext.current?.close();
@@ -38,11 +38,9 @@ export default function MorsePlayer({ originalText }: IProps) {
     return new Promise<void>((resolve) => {
       const timerId = window.setTimeout(() => {
         resolve();
-        activeTimers.current = activeTimers.current.filter(
-          (id) => id !== timerId
-        );
+        activeTimers.current.delete(timerId);
       }, ms);
-      activeTimers.current.push(timerId);
+      activeTimers.current.add(timerId);
     });
   }, []);
 
@@ -98,16 +96,18 @@ export default function MorsePlayer({ originalText }: IProps) {
           const cleanupTimerId = window.setTimeout(() => {
             cleanupSound();
             resolve();
-            activeTimers.current = activeTimers.current.filter(
-              (id) => id !== fadeOutTimerId && id !== cleanupTimerId
-            );
+            activeTimers.current.forEach((id) => {
+              if (id === fadeOutTimerId || id === cleanupTimerId) {
+                activeTimers.current.delete(id);
+              }
+            });
           }, 20);
 
-          activeTimers.current.push(cleanupTimerId);
+          activeTimers.current.add(cleanupTimerId);
         }
       }, duration);
 
-      activeTimers.current.push(fadeOutTimerId);
+      activeTimers.current.add(fadeOutTimerId);
 
       if (audioContext.current) {
         audioContext.current.onstatechange = () => {
