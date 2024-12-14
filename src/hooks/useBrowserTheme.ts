@@ -2,19 +2,20 @@ import { useEffect, useState } from "react";
 
 export const useBrowserTheme = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(
-    () => window.matchMedia("(prefers-color-scheme: dark)").matches
+    window.matchMedia("(prefers-color-scheme: dark)").matches
   );
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleThemeChange = (e: any) => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleThemeChange = (e: MediaQueryListEvent) => {
       setIsDarkTheme(e.matches);
     };
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", handleThemeChange);
 
-    return () => window.removeEventListener("change", handleThemeChange);
+    mediaQuery.addEventListener("change", handleThemeChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleThemeChange);
+    };
   }, []);
 
   return isDarkTheme;
