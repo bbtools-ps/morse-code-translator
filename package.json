@@ -12,7 +12,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vitest run --reporter=verbose && vite build",
+    "build": "tsc && vite build",
+    "prebuild": "vitest run",
     "preview": "vite preview",
     "test": "vitest --reporter=verbose",
     "format": "prettier --write '**/*.{js,ts,tsx,jsx}'",
