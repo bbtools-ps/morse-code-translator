@@ -33,66 +33,72 @@ describe("<App/>", () => {
     expect(btnReset).toBeInTheDocument();
   });
   it("should allow the user to type into the input field", async () => {
+    const user = userEvent.setup();
     const testValue = "test";
     render(<App />);
     const inputField = screen.getByLabelText(/original text/i);
 
-    await userEvent.type(inputField, testValue);
+    await user.type(inputField, testValue);
 
     expect(inputField).toHaveValue(testValue.toUpperCase());
   });
   it("should convert all typed text into uppercase", async () => {
+    const user = userEvent.setup();
     const testValue = "tEsT";
     render(<App />);
     const inputField = screen.getByLabelText(/original text/i);
 
-    await userEvent.type(inputField, testValue);
+    await user.type(inputField, testValue);
 
     expect(inputField).toHaveValue(testValue.toUpperCase());
   });
   it("should convert typed text into morse code", async () => {
+    const user = userEvent.setup();
     const testValue = "test";
     const result = encodeMorse(testValue);
     render(<App />);
     const inputField = screen.getByLabelText(/original text/i);
     const outputField = screen.getByLabelText(/morse code/i);
 
-    await userEvent.type(inputField, testValue);
+    await user.type(inputField, testValue);
 
     expect(outputField).toHaveTextContent(result);
   });
   it("should be able to switch the conversion from regular text to morse code", async () => {
+    const user = userEvent.setup();
     render(<App />);
     const btnSwitch = screen.getByRole("button", { name: /translate switch/i });
 
-    await userEvent.click(btnSwitch);
+    await user.click(btnSwitch);
 
     expect(() => screen.getByLabelText(/original/i)).toThrow();
     expect(screen.getByLabelText(/translated/i)).toBeInTheDocument();
   });
   it("should convert the morse code back to original text", async () => {
+    const user = userEvent.setup();
     const testValue = "test";
     const morseValue = encodeMorse(testValue);
     render(<App />);
     const btnSwitch = screen.getByRole("button", { name: /translate switch/i });
 
-    await userEvent.click(btnSwitch);
-    await userEvent.type(screen.getByLabelText(/morse code/i), morseValue);
+    await user.click(btnSwitch);
+    await user.type(screen.getByLabelText(/morse code/i), morseValue);
 
     expect(screen.getByLabelText(/translated/i)).toHaveTextContent(
       testValue.toUpperCase()
     );
   });
   it("should be able to reset everything to defaults when clicking on the Reset button", async () => {
+    const user = userEvent.setup();
     render(<App />);
     const inputField = screen.getByLabelText(/original/i);
     const outputField = screen.getByLabelText(/morse/i);
     const btnReset = screen.getByRole("button", { name: /reset/i });
     const btnSwitch = screen.getByRole("button", { name: /translate switch/i });
 
-    await userEvent.type(inputField, "test");
-    await userEvent.click(btnSwitch);
-    await userEvent.click(btnReset);
+    await user.type(inputField, "test");
+    await user.click(btnSwitch);
+    await user.click(btnReset);
 
     expect(() => screen.getByLabelText(/translated/i)).toThrow();
     expect(inputField).toHaveValue("");

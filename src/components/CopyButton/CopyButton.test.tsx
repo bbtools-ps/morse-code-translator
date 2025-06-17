@@ -17,18 +17,20 @@ describe("<CopyButton/>", () => {
   });
 
   it("should call the onClick function when user clicks on the button", async () => {
+    const user = userEvent.setup();
     const testFn = vi.fn();
     render(<CopyButton onClick={testFn} />);
 
-    await userEvent.click(screen.getByRole("button"));
+    await user.click(screen.getByRole("button"));
 
     expect(testFn).toHaveBeenCalled();
   });
 
   it('should change the text to "Copied!" after user clicks on the button', async () => {
+    const user = userEvent.setup();
     render(<CopyButton onClick={async () => {}} />);
 
-    await userEvent.click(screen.getByRole("button"));
+    await user.click(screen.getByRole("button"));
 
     expect(screen.getByText(/copied/i)).toBeInTheDocument();
   });
