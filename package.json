@@ -2,6 +2,7 @@
   "name": "morse-code-translator",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
@@ -19,7 +20,8 @@
     "test": "vitest --reporter=verbose",
     "format": "prettier --write '**/*.{js,ts,tsx,jsx}'",
     "fix": "eslint --fix src",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "prepare": "husky"
   },
   "browserslist": {
     "production": [
@@ -48,7 +50,9 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^15.9.0",
+    "husky": "^9.1.7",
     "jsdom": "^21.1.0",
+    "lint-staged": "^16.2.6",
     "prettier": "^3.3.3",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.16.0",
