@@ -1,15 +1,20 @@
 import { createTheme } from "@mui/material";
-import { createContext, useEffect, useMemo, useState } from "react";
-import { useBrowserTheme } from "./useBrowserTheme";
+import { createContext, useMemo, useState } from "react";
 
 type ColorMode = "light" | "dark";
 
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 export const useColorTheme = () => {
-  const [mode, setMode] = useState(
-    (localStorage.getItem("theme") as ColorMode) || "light"
-  );
+  const [mode, setMode] = useState<ColorMode>(() => {
+    const savedTheme = localStorage.getItem("theme") as ColorMode;
+    if (savedTheme) return savedTheme;
+    // Fall back to browser preference if no saved theme
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  });
+
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
@@ -28,19 +33,6 @@ export const useColorTheme = () => {
       }),
     [mode]
   );
-  const isDarkTheme = useBrowserTheme();
-
-  // Set the default color theme based on browser's color theme
-  useEffect(() => {
-    // If the user has already picked the color theme return
-    if (localStorage.getItem("theme")) return;
-
-    if (isDarkTheme) {
-      setMode("dark");
-    } else {
-      setMode("light");
-    }
-  }, [isDarkTheme]);
 
   return { colorMode, theme };
 };
