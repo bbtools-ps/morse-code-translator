@@ -19,6 +19,7 @@
     "preview": "vite preview",
     "test": "vitest --reporter=verbose",
     "format": "prettier --write '**/*.{js,ts,tsx,jsx}'",
+    "lint": "eslint src",
     "fix": "eslint --fix src",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky"
