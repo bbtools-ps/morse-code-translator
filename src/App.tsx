@@ -1,8 +1,10 @@
 import SyncAltIcon from "@mui/icons-material/SyncAlt";
+import type { PaletteMode } from "@mui/material";
 import {
   Box,
   Button,
   Card,
+  createTheme,
   Grid,
   IconButton,
   TextField,
@@ -11,13 +13,13 @@ import {
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import CopyButton from "./components/CopyButton/CopyButton";
 import Footer from "./components/Footer/Footer";
 import Logo from "./components/Logo/Logo";
 import MorsePlayer from "./components/MorsePlayer/MorsePlayer";
 import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher";
-import { ColorModeContext, useColorTheme } from "./hooks";
+import { ColorModeContext } from "./hooks";
 import { decodeMorse, encodeMorse } from "./utils";
 
 export default function App() {
@@ -26,7 +28,31 @@ export default function App() {
   const [isMorseTranslated, setIsMorseTranslated] = useState(false);
 
   const isDesktop = useMediaQuery("(min-width:37.5em)");
-  const { colorMode, theme } = useColorTheme();
+
+  const [mode, setMode] = useState<PaletteMode>(() => {
+    const savedTheme = localStorage.getItem("theme") as PaletteMode;
+
+    if (savedTheme) return savedTheme;
+
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  });
+
+  const toggleColorMode = useCallback(() => {
+    localStorage.setItem("theme", mode === "light" ? "dark" : "light");
+    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+  }, [mode]);
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+        },
+      }),
+    [mode]
+  );
 
   const handleReset = () => {
     setValue("");
@@ -35,7 +61,7 @@ export default function App() {
   };
 
   return (
-    <ColorModeContext.Provider value={colorMode}>
+    <ColorModeContext.Provider value={{ toggleColorMode }}>
       <ThemeProvider theme={theme}>
         <Box
           sx={{

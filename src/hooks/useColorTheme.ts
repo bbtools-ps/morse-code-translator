@@ -1,38 +1,19 @@
-import { createTheme } from "@mui/material";
-import { createContext, useMemo, useState } from "react";
+import { createContext, useContext } from "react";
 
-type ColorMode = "light" | "dark";
+interface ColorModeContextType {
+  toggleColorMode: () => void;
+}
 
-export const ColorModeContext = createContext({ toggleColorMode: () => {} });
+export const ColorModeContext = createContext<ColorModeContextType>({
+  toggleColorMode: () => {},
+});
 
-export const useColorTheme = () => {
-  const [mode, setMode] = useState<ColorMode>(() => {
-    const savedTheme = localStorage.getItem("theme") as ColorMode;
-    if (savedTheme) return savedTheme;
-    // Fall back to browser preference if no saved theme
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-  });
+export const useColorMode = () => {
+  const context = useContext(ColorModeContext);
 
-  const colorMode = useMemo(
-    () => ({
-      toggleColorMode: () => {
-        localStorage.setItem("theme", mode === "light" ? "dark" : "light");
-        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
-      },
-    }),
-    [mode]
-  );
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode,
-        },
-      }),
-    [mode]
-  );
+  if (!context) {
+    throw new Error("useColorMode must be used within a ThemeProvider");
+  }
 
-  return { colorMode, theme };
+  return context;
 };
