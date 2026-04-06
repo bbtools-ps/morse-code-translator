@@ -15,7 +15,7 @@ export default function CopyButton({ onClick }: IProps) {
     hasError: false,
   });
 
-  const debounce = useDebounce(TIMEOUT);
+  const debounce = useDebounce({ timeout: TIMEOUT });
 
   const handleCopy = async () => {
     setCopyRequest({ isCopied: true, hasError: false });
