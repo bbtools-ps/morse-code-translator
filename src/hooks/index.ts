@@ -1,2 +1,2 @@
-export * from "./useColorTheme";
+export * from "./useColorMode";
 export * from "./useDebounce";
