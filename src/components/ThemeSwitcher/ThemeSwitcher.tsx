@@ -11,10 +11,13 @@ export default function ThemeSwitcher() {
 
   return (
     <IconButton
+      type="button"
+      role="switch"
+      aria-checked={theme.palette.mode === "dark"}
+      aria-label="Dark theme"
       sx={{ ml: 1 }}
       onClick={toggleColorMode}
       color="inherit"
-      aria-label="Theme switch"
     >
       {theme.palette.mode === "dark" ? (
         <Brightness7Icon />
