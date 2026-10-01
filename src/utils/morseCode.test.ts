@@ -1,4 +1,4 @@
-import { decodeMorse, encodeMorse } from ".";
+import { decodeMorse, encodeMorse } from "./morseCode";
 
 describe("encodeMorse()", () => {
   it("should convert the regular text to morse code", () => {

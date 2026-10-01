@@ -1,4 +1,4 @@
-import { getCurrentYear } from "@/utils";
+import { getCurrentYear } from "@/utils/date";
 import { Link, Typography } from "@mui/material";
 
 interface IProps {

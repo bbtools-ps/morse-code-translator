@@ -19,8 +19,8 @@ import Footer from "./components/Footer/Footer";
 import Logo from "./components/Logo/Logo";
 import MorsePlayer from "./components/MorsePlayer/MorsePlayer";
 import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher";
-import { ColorModeContext } from "./hooks";
-import { decodeMorse, encodeMorse } from "./utils";
+import { ColorModeContext } from "./hooks/useColorMode";
+import { decodeMorse, encodeMorse } from "./utils/morseCode";
 
 export default function App() {
   const [value, setValue] = useState("");
