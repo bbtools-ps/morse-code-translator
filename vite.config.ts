@@ -1278,10 +1278,7 @@ export default defineConfig({
   staged: {
     "*": "vp check --fix",
   },
-  plugins: lazyPlugins(() => [
-    react(),
-    tsconfigPaths(),
-  ]),
+  plugins: lazyPlugins(() => [react(), tsconfigPaths()]),
   build: { outDir: "build" },
   test: {
     // Vitest v4 compatibility: preserve mock call history.
