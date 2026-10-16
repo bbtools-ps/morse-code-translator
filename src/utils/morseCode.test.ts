@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vite-plus/test";
 import { decodeMorse, encodeMorse } from "./morseCode";
 
 describe("encodeMorse()", () => {

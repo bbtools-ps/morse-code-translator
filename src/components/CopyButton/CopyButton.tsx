@@ -1,5 +1,5 @@
 import { useDebounce } from "@/hooks/useDebounce";
-import ContentCopy from "@mui/icons-material/ContentCopy";
+import { ContentCopy } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { useState } from "react";
 

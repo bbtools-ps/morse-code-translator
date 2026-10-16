@@ -1,4 +1,4 @@
-import SyncAltIcon from "@mui/icons-material/SyncAlt";
+import { SyncAlt as SyncAltIcon } from "@mui/icons-material";
 import type { PaletteMode } from "@mui/material";
 import {
   Box,
@@ -30,9 +30,15 @@ export default function App() {
   const isDesktop = useMediaQuery("(min-width:37.5em)");
 
   const [mode, setMode] = useState<PaletteMode>(() => {
-    const savedTheme = localStorage.getItem("theme") as PaletteMode;
+    if (typeof window === "undefined") {
+      return "light";
+    }
 
-    if (savedTheme) return savedTheme;
+    const savedTheme = window.localStorage.getItem("theme");
+
+    if (savedTheme === "light" || savedTheme === "dark") {
+      return savedTheme;
+    }
 
     return window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
@@ -40,9 +46,16 @@ export default function App() {
   });
 
   const toggleColorMode = useCallback(() => {
-    localStorage.setItem("theme", mode === "light" ? "dark" : "light");
-    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
-  }, [mode]);
+    setMode((prevMode) => {
+      const nextMode = prevMode === "light" ? "dark" : "light";
+
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem("theme", nextMode);
+      }
+
+      return nextMode;
+    });
+  }, []);
 
   const theme = useMemo(
     () =>

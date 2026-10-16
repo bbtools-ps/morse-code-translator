@@ -26,7 +26,7 @@ export default function MorsePlayer({ originalText }: IProps) {
     activeTimers.current.clear();
 
     if (audioContext.current?.state !== "closed") {
-      audioContext.current?.close();
+      void audioContext.current?.close();
     }
   }, []);
 
@@ -174,7 +174,7 @@ export default function MorsePlayer({ originalText }: IProps) {
       shouldStop.current = false;
       currentPosition.current = 0;
 
-      playMorse(text);
+      void playMorse(text);
     },
     [isPlaying, playMorse, sleep, cleanup]
   );
@@ -189,7 +189,7 @@ export default function MorsePlayer({ originalText }: IProps) {
     if (isPlaying) {
       stopPlaying();
     } else {
-      startPlaying(originalText);
+      void startPlaying(originalText);
     }
   }, [isPlaying, stopPlaying, startPlaying, originalText]);
 

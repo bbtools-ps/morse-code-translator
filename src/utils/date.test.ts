@@ -1,4 +1,11 @@
-import { vi } from "vitest";
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+} from "vite-plus/test";
 import { getCurrentYear } from "./date";
 
 describe("getCurrentYear()", () => {
